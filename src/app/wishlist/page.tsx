@@ -28,22 +28,27 @@ export default async function WishlistPage() {
                 {item.price && (
                   <p className="text-sm text-gray-600">{item.price}</p>
                 )}
-                <div className="flex gap-3 mt-2 text-sm">
-                  {item.amazonUrl && (
-                    <a
-                      href={item.amazonUrl}
-                      target="_blank"
-                      className="text-blue-600 hover:underline"
+                <div className="flex flex-col gap-4">
+                  <div className="flex gap-3 mt-2 text-sm">
+                    {item.amazonUrl && (
+                      <a
+                        href={item.amazonUrl}
+                        target="_blank"
+                        className="text-blue-600 hover:underline"
+                      >
+                        Amazonで見る
+                      </a>
+                    )}
+                    <Link
+                      href={`/books/${encodeURIComponent(item.title)}`}
+                      className="text-green-600 hover:underline"
                     >
-                      Amazonで見る
-                    </a>
-                  )}
-                  <Link
-                    href={`/books/${encodeURIComponent(item.title)}`}
-                    className="text-green-600 hover:underline"
-                  >
-                    この本を検索
-                  </Link>
+                      この本を検索
+                    </Link>
+                  </div>
+                  <div>
+                    <button>本棚に登録</button>
+                  </div>
                 </div>
               </div>
             </li>
