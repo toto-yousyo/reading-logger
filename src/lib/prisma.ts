@@ -6,7 +6,10 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
 export default function getPrisma() {
   if (!globalForPrisma.prisma) {
-    const pool = new Pool({ connectionString: process.env.POSTGRES_URL });
+    const pool = new Pool({
+      connectionString: process.env.POSTGRES_URL,
+      ssl: { rejectUnauthorized: false },
+    });
     const adapter = new PrismaPg(pool);
     globalForPrisma.prisma = new PrismaClient({ adapter });
   }
