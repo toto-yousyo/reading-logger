@@ -13,6 +13,9 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    ignores: ["app/generated/prisma/**/*"],
+  },
 ]);
 
 export default eslintConfig;
