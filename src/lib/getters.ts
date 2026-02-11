@@ -1,6 +1,7 @@
 import type { Book, BookApi, Review } from "@/lib/types";
 
 const API_URL = "https://www.googleapis.com/books/v1/volumes";
+const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
 export function createBook(book: BookApi): Book {
   const authors = book.volumeInfo?.authors;
@@ -19,7 +20,7 @@ export function createBook(book: BookApi): Book {
 
 export async function getBooksByKeyword(keyword: string): Promise<Book[]> {
   const res = await fetch(
-    `${API_URL}?q=${keyword}&langRestrict=ja&maxResults=20&printType=books`,
+    `${API_URL}?q=${keyword}&langRestrict=ja&maxResults=20&printType=books&key=${API_KEY}`,
     { cache: "no-store" },
   );
   const result = await res.json();
@@ -40,7 +41,7 @@ export async function getAllReviews(): Promise<Review[]> {
 }
 
 export async function getBookById(id: string): Promise<Book> {
-  const res = await fetch(`${API_URL}/${id}`, { cache: "no-store" });
+  const res = await fetch(`${API_URL}/${id}?key=${API_KEY}`, { cache: "no-store" });
   const result = await res.json();
   return createBook(result);
 }
