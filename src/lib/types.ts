@@ -55,3 +55,10 @@ export type BookDetailsProps = Readonly<{
   index?: number;
   book: Book;
 }>;
+
+export type WishlistItem = {
+  title: string;
+  image: string;
+  amazonUrl: string;
+  price?: string;
+};

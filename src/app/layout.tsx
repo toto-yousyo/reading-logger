@@ -31,17 +31,16 @@ export default function RootLayout({ children }: LayoutProps) {
               </Link>
             </li>
             <li className="block text-blue-300 px-4 py-2 my-1 hover:bg-gray-100 rounded">
-              <a
-                className="no-underline text-blue-300"
-                href="https://wings.msn.to/"
-                target="_blank"
-              >
-                Support
-              </a>
+              <Link className="no-underline text-blue-300" href="/wishlist">
+                Amazon
+              </Link>
             </li>
           </ul>
         </nav>
-        <div className="ml-2">{children}</div>
+        <div className="flex gap-lg">
+          <div>task</div>
+          <div className="ml-2">{children}</div>
+        </div>
       </body>
     </html>
   );

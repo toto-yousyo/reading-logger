@@ -1,4 +1,5 @@
-import type { Book, BookApi, Review } from "@/lib/types";
+import * as cheerio from "cheerio";
+import type { Book, BookApi, Review, WishlistItem } from "@/lib/types";
 
 const API_URL = "https://openlibrary.org/search.json";
 
@@ -50,6 +51,58 @@ export async function getBookById(id: string): Promise<Book> {
     return { id, title: "", author: "", price: 0, publisher: "", published: "", image: "/vercel.svg" };
   }
   return createBook(docs[0]);
+}
+
+const WISHLIST_URL = "https://www.amazon.jp/hz/wishlist/ls/1HGK6C5A6Q1LY";
+
+export async function getAmazonWishlist(): Promise<WishlistItem[]> {
+  const res = await fetch(WISHLIST_URL, {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept-Language": "ja-JP,ja;q=0.9",
+    },
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) {
+    console.error("Failed to fetch wishlist:", res.status);
+    return [];
+  }
+
+  const html = await res.text();
+  const $ = cheerio.load(html);
+  const items: WishlistItem[] = [];
+
+  $("li[data-id]").each((_, el) => {
+    const $el = $(el);
+    const title =
+      $el.find("a[id^='itemName_']").text().trim() ||
+      $el.find("h2 a, h3 a").first().text().trim();
+    if (!title) return;
+
+    const linkHref =
+      $el.find("a[id^='itemName_']").attr("href") ||
+      $el.find("h2 a, h3 a").first().attr("href") ||
+      "";
+    const amazonUrl = linkHref.startsWith("http")
+      ? linkHref
+      : linkHref
+        ? `https://www.amazon.jp${linkHref}`
+        : "";
+
+    const image =
+      $el.find("img").first().attr("src") || "/vercel.svg";
+
+    const price =
+      $el.find("span[id^='itemPrice_']").text().trim() ||
+      $el.find(".a-price .a-offscreen").first().text().trim() ||
+      undefined;
+
+    items.push({ title, image, amazonUrl, price });
+  });
+
+  return items;
 }
 
 export async function getReviewById(id: string): Promise<Review | null> {
