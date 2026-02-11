@@ -1,4 +1,3 @@
-import getPrisma from "@/lib/prisma";
 import type { Book, BookApi, Review } from "@/lib/types";
 
 const API_URL = "https://www.googleapis.com/books/v1/volumes";
@@ -32,6 +31,7 @@ export async function getBooksByKeyword(keyword: string): Promise<Book[]> {
 }
 
 export async function getAllReviews(): Promise<Review[]> {
+  const getPrisma = (await import("@/lib/prisma")).default;
   return await getPrisma().reviews.findMany({
     orderBy: {
       read: "desc",
@@ -46,6 +46,7 @@ export async function getBookById(id: string): Promise<Book> {
 }
 
 export async function getReviewById(id: string): Promise<Review | null> {
+  const getPrisma = (await import("@/lib/prisma")).default;
   return await getPrisma().reviews.findUnique({
     where: {
       id: id,
