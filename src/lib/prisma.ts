@@ -1,10 +1,10 @@
 import { PrismaClient } from "@/app/generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-//global.prisma上にPrismaっクライアントが存在すれば再利用
-const prisma = globalForPrisma.prisma || new PrismaClient({ log: ["query"] });
-// 非Production環境ではglobalForPrisma.prismaにオブジェクトを格納
+const adapter = new PrismaPg(process.env.POSTGRES_URL!);
+const prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 export default prisma;
