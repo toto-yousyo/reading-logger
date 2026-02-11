@@ -1,21 +1,12 @@
 import type { ReactNode } from "react";
 
 export type BookApi = {
-  id: string;
-  volumeInfo: {
-    title: string;
-    authors: string[];
-    publisher: string;
-    publishedDate: string;
-    imageLinks: {
-      smallThumbnail: string | null;
-    };
-  };
-  saleInfo: {
-    listPrice: {
-      amount: number;
-    };
-  };
+  key: string;
+  title: string;
+  author_name?: string[];
+  publisher?: string[];
+  first_publish_year?: number;
+  cover_i?: number;
 };
 
 export type Review = Book & {

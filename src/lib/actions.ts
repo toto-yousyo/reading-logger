@@ -10,7 +10,7 @@ export async function addReview(data: FormData) {
   const input = {
     title: book.title,
     author: book.author,
-    price: Number(book.price),
+    price: 0,
     publisher: book.publisher,
     published: book.published,
     image: book.image || "",
