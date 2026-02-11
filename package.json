@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "vercel-build": "prisma generate && next build",
     "build": "next build",
@@ -10,6 +11,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^7.3.0",
     "@vercel/postgres": "^0.10.0",
     "next": "16.1.6",
     "react": "19.2.3",
