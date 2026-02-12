@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  reviews: 'reviews'
+  reviews: 'reviews',
+  tasks: 'tasks'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "reviews"
+    modelProps: "reviews" | "tasks"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    tasks: {
+      payload: Prisma.$tasksPayload<ExtArgs>
+      fields: Prisma.tasksFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tasksFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tasksFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>
+        }
+        findFirst: {
+          args: Prisma.tasksFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tasksFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>
+        }
+        findMany: {
+          args: Prisma.tasksFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>[]
+        }
+        create: {
+          args: Prisma.tasksCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>
+        }
+        createMany: {
+          args: Prisma.tasksCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.tasksCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>[]
+        }
+        delete: {
+          args: Prisma.tasksDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>
+        }
+        update: {
+          args: Prisma.tasksUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>
+        }
+        deleteMany: {
+          args: Prisma.tasksDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tasksUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.tasksUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>[]
+        }
+        upsert: {
+          args: Prisma.tasksUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tasksPayload>
+        }
+        aggregate: {
+          args: Prisma.TasksAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTasks>
+        }
+        groupBy: {
+          args: Prisma.tasksGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TasksGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tasksCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TasksCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -532,6 +607,21 @@ export const ReviewsScalarFieldEnum = {
 export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
 
 
+export const TasksScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  category: 'category',
+  dueDate: 'dueDate',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TasksScalarFieldEnum = (typeof TasksScalarFieldEnum)[keyof typeof TasksScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -546,6 +636,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
@@ -705,6 +803,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   reviews?: Prisma.reviewsOmit
+  tasks?: Prisma.tasksOmit
 }
 
 /* Types for Logging */

@@ -35,12 +35,14 @@ export default function RootLayout({ children }: LayoutProps) {
                 Amazon
               </Link>
             </li>
+            <li className="block text-blue-300 px-4 py-2 my-1 hover:bg-gray-100 rounded">
+              <Link className="no-underline text-blue-300" href="/tasks">
+                Tasks
+              </Link>
+            </li>
           </ul>
         </nav>
-        <div className="flex gap-lg">
-          <div>task</div>
-          <div className="ml-2">{children}</div>
-        </div>
+        <div className="ml-2">{children}</div>
       </body>
     </html>
   );

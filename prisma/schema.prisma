@@ -22,3 +22,15 @@ model reviews {
   read DateTime @default(now())
   memo String
 }
+
+model tasks {
+  id          String    @id @default(cuid())
+  title       String
+  description String    @default("")
+  status      String    @default("pending")
+  priority    String    @default("medium")
+  category    String    @default("")
+  dueDate     DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+}

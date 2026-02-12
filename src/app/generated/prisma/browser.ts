@@ -22,3 +22,8 @@ export * from './enums';
  * 
  */
 export type reviews = Prisma.reviewsModel
+/**
+ * Model tasks
+ * 
+ */
+export type tasks = Prisma.tasksModel

@@ -62,3 +62,19 @@ export type WishlistItem = {
   amazonUrl: string;
   price?: string;
 };
+
+export type Task = {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  priority: string;
+  category: string;
+  dueDate: Date | null;
+  completedAt: Date | null;
+  createdAt: Date;
+};
+
+export type TaskFormProps = Readonly<{
+  task?: Task;
+}>;

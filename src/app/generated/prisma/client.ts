@@ -44,3 +44,8 @@ export { Prisma }
  * 
  */
 export type reviews = Prisma.reviewsModel
+/**
+ * Model tasks
+ * 
+ */
+export type tasks = Prisma.tasksModel

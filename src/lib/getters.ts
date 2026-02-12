@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import type { Book, BookApi, Review, WishlistItem } from "@/lib/types";
+import type { Book, BookApi, Review, Task, WishlistItem } from "@/lib/types";
 
 const API_URL = "https://openlibrary.org/search.json";
 
@@ -111,5 +111,21 @@ export async function getReviewById(id: string): Promise<Review | null> {
     where: {
       id: id,
     },
+  });
+}
+
+export async function getAllTasks(): Promise<Task[]> {
+  const getPrisma = (await import("@/lib/prisma")).default;
+  return await getPrisma().tasks.findMany({
+    orderBy: [
+      { createdAt: "desc" },
+    ],
+  });
+}
+
+export async function getTaskById(id: string): Promise<Task | null> {
+  const getPrisma = (await import("@/lib/prisma")).default;
+  return await getPrisma().tasks.findUnique({
+    where: { id },
   });
 }

@@ -65,3 +65,57 @@ export async function removeReview(data: FormData) {
   revalidatePath("/");
   redirect("/");
 }
+
+export async function addTask(data: FormData) {
+  const dueDate = data.get("dueDate") as string;
+  await getPrisma().tasks.create({
+    data: {
+      title: data.get("title") as string,
+      description: (data.get("description") as string) || "",
+      priority: (data.get("priority") as string) || "medium",
+      category: (data.get("category") as string) || "",
+      dueDate: dueDate ? new Date(dueDate) : null,
+    },
+  });
+  revalidatePath("/tasks");
+  redirect("/tasks");
+}
+
+export async function updateTask(data: FormData) {
+  const id = data.get("id") as string;
+  const dueDate = data.get("dueDate") as string;
+  await getPrisma().tasks.update({
+    where: { id },
+    data: {
+      title: data.get("title") as string,
+      description: (data.get("description") as string) || "",
+      priority: (data.get("priority") as string) || "medium",
+      category: (data.get("category") as string) || "",
+      dueDate: dueDate ? new Date(dueDate) : null,
+    },
+  });
+  revalidatePath("/tasks");
+  redirect("/tasks");
+}
+
+export async function toggleTaskStatus(data: FormData) {
+  const id = data.get("id") as string;
+  const currentStatus = data.get("status") as string;
+  const newStatus = currentStatus === "completed" ? "pending" : "completed";
+  await getPrisma().tasks.update({
+    where: { id },
+    data: {
+      status: newStatus,
+      completedAt: newStatus === "completed" ? new Date() : null,
+    },
+  });
+  revalidatePath("/tasks");
+}
+
+export async function removeTask(data: FormData) {
+  await getPrisma().tasks.delete({
+    where: { id: data.get("id") as string },
+  });
+  revalidatePath("/tasks");
+  redirect("/tasks");
+}
