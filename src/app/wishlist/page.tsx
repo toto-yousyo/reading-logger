@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAmazonWishlist } from "@/lib/getters";
+import { registerFromWishlist } from "@/lib/actions";
 
 export default async function WishlistPage() {
   const items = await getAmazonWishlist();
@@ -46,9 +47,16 @@ export default async function WishlistPage() {
                       この本を検索
                     </Link>
                   </div>
-                  <div>
-                    <button>本棚に登録</button>
-                  </div>
+                  <form action={registerFromWishlist}>
+                    <input type="hidden" name="title" value={item.title} />
+                    <input type="hidden" name="image" value={item.image} />
+                    <button
+                      type="submit"
+                      className="bg-blue-600 text-white rounded px-4 py-2 mr-2 hover:bg-blue-500"
+                    >
+                      登録
+                    </button>
+                  </form>
                 </div>
               </div>
             </li>

@@ -10,6 +10,7 @@ export default function BookDetails({ index, book }: BookDetailsProps) {
           alt={book.title}
           sizes="100vh"
           fill
+          className="object-contain"
           priority={(index ?? 0) < 5}
         />
       </div>
