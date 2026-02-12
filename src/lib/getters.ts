@@ -105,6 +105,13 @@ export async function getAmazonWishlist(): Promise<WishlistItem[]> {
   return items;
 }
 
+export async function getWishlistFromDB(): Promise<WishlistItem[]> {
+  const getPrisma = (await import("@/lib/prisma")).default;
+  return await getPrisma().wishlist_items.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+}
+
 export async function getReviewById(id: string): Promise<Review | null> {
   const getPrisma = (await import("@/lib/prisma")).default;
   return await getPrisma().reviews.findUnique({

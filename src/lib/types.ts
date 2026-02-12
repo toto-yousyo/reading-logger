@@ -57,6 +57,7 @@ export type BookDetailsProps = Readonly<{
 }>;
 
 export type WishlistItem = {
+  id?: string;
   title: string;
   image: string;
   amazonUrl: string;

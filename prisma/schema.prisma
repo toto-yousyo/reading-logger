@@ -23,6 +23,15 @@ model reviews {
   memo String
 }
 
+model wishlist_items {
+  id        String   @id @default(cuid())
+  title     String
+  image     String
+  amazonUrl String
+  price     String?
+  createdAt DateTime @default(now())
+}
+
 model tasks {
   id          String    @id @default(cuid())
   title       String

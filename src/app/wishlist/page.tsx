@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getAmazonWishlist } from "@/lib/getters";
+import { getWishlistFromDB } from "@/lib/getters";
 import { registerFromWishlist } from "@/lib/actions";
 
 export default async function WishlistPage() {
-  const items = await getAmazonWishlist();
+  const items = await getWishlistFromDB();
 
   return (
     <div>
@@ -12,7 +12,7 @@ export default async function WishlistPage() {
         読みたい本リスト
       </h2>
       {items.length === 0 ? (
-        <p>ほしい物リストを取得できませんでした。</p>
+        <p>データがありません。ローカルで同期を実行してください。</p>
       ) : (
         <ul className="space-y-4">
           {items.map((item, i) => (
