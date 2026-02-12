@@ -1,9 +1,11 @@
+import { connection } from "next/server";
 import Image from "next/image";
 import Link from "next/link";
 import { getWishlistFromDB } from "@/lib/getters";
 import { registerFromWishlist } from "@/lib/actions";
 
 export default async function WishlistPage() {
+  await connection();
   const items = await getWishlistFromDB();
 
   return (
