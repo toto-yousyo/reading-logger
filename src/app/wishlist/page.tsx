@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getWishlistFromDB } from "@/lib/getters";
 import { registerFromWishlist } from "@/lib/actions";
+import SyncButton from "./SyncButton";
 
 export default async function WishlistPage() {
   await connection();
@@ -10,9 +11,12 @@ export default async function WishlistPage() {
 
   return (
     <div>
-      <h2 className="text-2xl font-light text-indigo-800 mb-4">
-        読みたい本リスト
-      </h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-light text-indigo-800">
+          読みたい本リスト
+        </h2>
+        <SyncButton />
+      </div>
       {items.length === 0 ? (
         <p>データがありません。ローカルで同期を実行してください。</p>
       ) : (
