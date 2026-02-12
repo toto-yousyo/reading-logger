@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type reviews = Prisma.reviewsModel
 /**
+ * Model wishlist_items
+ * 
+ */
+export type wishlist_items = Prisma.wishlist_itemsModel
+/**
  * Model tasks
  * 
  */

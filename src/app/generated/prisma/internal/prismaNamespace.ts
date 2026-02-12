@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   reviews: 'reviews',
+  wishlist_items: 'wishlist_items',
   tasks: 'tasks'
 } as const
 
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "reviews" | "tasks"
+    modelProps: "reviews" | "wishlist_items" | "tasks"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -476,6 +477,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.reviewsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ReviewsCountAggregateOutputType> | number
+        }
+      }
+    }
+    wishlist_items: {
+      payload: Prisma.$wishlist_itemsPayload<ExtArgs>
+      fields: Prisma.wishlist_itemsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.wishlist_itemsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.wishlist_itemsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>
+        }
+        findFirst: {
+          args: Prisma.wishlist_itemsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.wishlist_itemsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>
+        }
+        findMany: {
+          args: Prisma.wishlist_itemsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>[]
+        }
+        create: {
+          args: Prisma.wishlist_itemsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>
+        }
+        createMany: {
+          args: Prisma.wishlist_itemsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.wishlist_itemsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>[]
+        }
+        delete: {
+          args: Prisma.wishlist_itemsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>
+        }
+        update: {
+          args: Prisma.wishlist_itemsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>
+        }
+        deleteMany: {
+          args: Prisma.wishlist_itemsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.wishlist_itemsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.wishlist_itemsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>[]
+        }
+        upsert: {
+          args: Prisma.wishlist_itemsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$wishlist_itemsPayload>
+        }
+        aggregate: {
+          args: Prisma.Wishlist_itemsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWishlist_items>
+        }
+        groupBy: {
+          args: Prisma.wishlist_itemsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Wishlist_itemsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.wishlist_itemsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Wishlist_itemsCountAggregateOutputType> | number
         }
       }
     }
@@ -605,6 +680,18 @@ export const ReviewsScalarFieldEnum = {
 } as const
 
 export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
+
+
+export const Wishlist_itemsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  image: 'image',
+  amazonUrl: 'amazonUrl',
+  price: 'price',
+  createdAt: 'createdAt'
+} as const
+
+export type Wishlist_itemsScalarFieldEnum = (typeof Wishlist_itemsScalarFieldEnum)[keyof typeof Wishlist_itemsScalarFieldEnum]
 
 
 export const TasksScalarFieldEnum = {
@@ -803,6 +890,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   reviews?: Prisma.reviewsOmit
+  wishlist_items?: Prisma.wishlist_itemsOmit
   tasks?: Prisma.tasksOmit
 }
 
